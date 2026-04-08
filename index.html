@@ -1,1 +1,209 @@
 
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nano Host ⚡ Minecraft Server Hosting</title>
+  <meta name="description" content="Hoste deinen Minecraft Server bei Nano Host – Tarife: Free, Ultra, Nano, >GOD<"/>
+  <style>
+    :root{
+      --bg:#0f0f13;--card:#1a1a24;--accent:#7c3aed;--accent2:#22d3ee;
+      --text:#e5e7eb;--muted:#9ca3af;--success:#10b981;--danger:#ef4444;
+      --god:#fbbf24;--border:#2d2d3a
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,sans-serif;
+      background:var(--bg);color:var(--text);line-height:1.6;
+      background-image:radial-gradient(circle at 20% 80%,rgba(124,58,237,.15) 0,transparent 50%),
+                       radial-gradient(circle at 80% 20%,rgba(34,211,238,.12) 0,transparent 50%)
+    }
+    .container{max-width:1100px;margin:0 auto;padding:20px}
+    header{
+      display:flex;justify-content:space-between;align-items:center;
+      padding:20px 0;border-bottom:1px solid var(--border);margin-bottom:40px
+    }
+    .logo{font-size:1.5rem;font-weight:800;background:linear-gradient(45deg,var(--accent),var(--accent2));
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    nav a{color:var(--muted);text-decoration:none;margin-left:20px;transition:.2s}
+    nav a:hover{color:var(--accent2)}
+    .hero{text-align:center;padding:40px 20px}
+    .hero h1{font-size:2.5rem;margin-bottom:15px}
+    .hero p{color:var(--muted);margin-bottom:25px;max-width:600px;margin-inline:auto}
+    .btn{
+      display:inline-block;background:var(--accent);color:#fff;padding:12px 28px;
+      border-radius:8px;text-decoration:none;font-weight:600;transition:.2s;border:none;cursor:pointer
+    }
+    .btn:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(124,58,237,.4)}
+    .btn-outline{background:transparent;border:2px solid var(--accent);color:var(--accent)}
+    .btn-outline:hover{background:var(--accent);color:#fff}
+    .section-title{text-align:center;font-size:1.8rem;margin:50px 0 30px}
+    .tariffs{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+    .card{
+      background:var(--card);border:1px solid var(--border);border-radius:12px;
+      padding:25px;text-align:center;transition:.2s
+    }
+    .card:hover{border-color:var(--accent2);transform:translateY(-4px)}
+    .card.god{border:2px solid var(--god);box-shadow:0 0 20px rgba(251,191,36,.2)}
+    .card h3{font-size:1.4rem;margin:10px 0}
+    .price{font-size:2rem;font-weight:800;margin:15px 0}
+    .price.free{color:var(--success)}.price.ultra{color:var(--accent2)}
+    .price.nano{color:var(--accent)}.price.god{color:var(--god)}
+    .features{list-style:none;margin:20px 0;text-align:left}
+    .features li{padding:8px 0;color:var(--muted);border-bottom:1px dashed var(--border)}
+    .features li:last-child{border:none}
+    .status-bar{
+      display:flex;gap:15px;justify-content:center;flex-wrap:wrap;margin:30px 0
+    }
+    .status{
+      background:var(--card);padding:15px 25px;border-radius:10px;
+      display:flex;align-items:center;gap:10px;border:1px solid var(--border)
+    }
+    .dot{width:12px;height:12px;border-radius:50%;background:var(--success);animation:pulse 2s infinite}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+    .server-list{display:grid;gap:12px;margin-top:20px}
+    .server{
+      background:var(--card);padding:15px;border-radius:8px;
+      display:flex;justify-content:space-between;align-items:center;border:1px solid var(--border)
+    }
+    .server-name{font-weight:600}.server-players{color:var(--muted);font-size:.9rem}
+    footer{
+      text-align:center;padding:40px 20px 20px;color:var(--muted);
+      border-top:1px solid var(--border);margin-top:50px;font-size:.9rem
+    }
+    .badge{
+      display:inline-block;padding:4px 10px;border-radius:20px;font-size:.75rem;
+      font-weight:600;margin-left:10px
+    }
+    .badge.free{background:rgba(16,185,129,.2);color:var(--success)}
+    .badge.god{background:rgba(251,191,36,.2);color:var(--god)}
+    @media(max-width:600px){
+      .hero h1{font-size:2rem}
+      header{flex-direction:column;gap:15px}
+      nav{display:flex;gap:15px;flex-wrap:wrap;justify-content:center}
+      nav a{margin:0}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">⚡ Nano Host</div>
+      <nav>
+        <a href="#tarife">Tarife</a>
+        <a href="#status">Status</a>
+        <a href="#servers">Server</a>
+        <a href="https://github.com/thenano-host" target="_blank">GitHub</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <h1>Dein Minecraft Server.<br><span style="color:var(--accent2)">Schnell. Einfach. Kostenlos.</span></h1>
+      <p>Hoste deinen eigenen Minecraft Server bei Nano Host – mit Tarifen für jeden Bedarf. Von Free bis >GOD<.</p>
+      <a href="#tarife" class="btn">Tarife ansehen</a>
+      <a href="https://github.com/thenano-host" class="btn btn-outline" style="margin-left:10px">GitHub Org</a>
+    </section>
+
+    <h2 class="section-title" id="tarife">🎁 Unsere Tarife</h2>
+    <div class="tariffs">
+      <div class="card">
+        <h3>Free</h3>
+        <div class="price free">€0</div>
+        <ul class="features">
+          <li>✓ 1 GB RAM</li>
+          <li>✓ 5 Slots</li>
+          <li>✓ Shared CPU</li>
+          <li>✓ Subdomain</li>
+          <li>✗ Kein Backup</li>
+        </ul>
+        <button class="btn btn-outline" onclick="selectPlan('Free')">Auswählen</button>
+      </div>
+      <div class="card">
+        <h3>Ultra</h3>
+        <div class="price ultra">€4,99</div>
+        <ul class="features">
+          <li>✓ 4 GB RAM</li>
+          <li>✓ 20 Slots</li>
+          <li>✓ Dedicated CPU</li>
+          <li>✓ Eigene IP</li>
+          <li>✓ Tägliche Backups</li>
+        </ul>
+        <button class="btn" onclick="selectPlan('Ultra')">Auswählen</button>
+      </div>
+      <div class="card">
+        <h3>Nano</h3>
+        <div class="price nano">€2,49</div>
+        <ul class="features">
+          <li>✓ 2 GB RAM</li>
+          <li>✓ 10 Slots</li>
+          <li>✓ Balanced CPU</li>
+          <li>✓ Subdomain</li>
+          <li>✓ Wöchentliche Backups</li>
+        </ul>
+        <button class="btn" onclick="selectPlan('Nano')">Auswählen</button>
+      </div>
+      <div class="card god">
+        <h3>>GOD< <span class="badge god">BEST</span></h3>
+        <div class="price god">€14,99</div>
+        <ul class="features">
+          <li>✓ 16 GB RAM</li>
+          <li>✓ Unbegrenzte Slots</li>
+          <li>✓ High-Perf CPU</li>
+          <li>✓ Dedicated IP + Port</li>
+          <li>✓ Echtzeit-Backups + Priority Support</li>
+        </ul>
+        <button class="btn" style="background:var(--god);color:#000" onclick="selectPlan('GOD')">Auswählen</button>
+      </div>
+    </div>
+
+    <h2 class="section-title" id="status">🟢 System Status</h2>
+    <div class="status-bar">
+      <div class="status"><div class="dot"></div> API: Online</div>
+      <div class="status"><div class="dot"></div> Panel: Online</div>
+      <div class="status"><div class="dot"></div> Nodes: 3/3 aktiv</div>
+      <div class="status"><div class="dot" style="background:var(--danger)"></div> Wartung: Keine</div>
+    </div>
+
+    <h2 class="section-title" id="servers">🎮 Live Server (Demo)</h2>
+    <div class="server-list" id="serverList">
+      <!-- Wird per JS gefüllt -->
+    </div>
+
+    <footer>
+      <p>© 2026 <strong>Nano Host</strong> • <a href="https://github.com/thenano-host" style="color:var(--accent2)">thenano-host.github.io</a></p>
+      <p style="margin-top:8px;font-size:.8rem">Hinweis: Dies ist eine Demo-Oberfläche. Echte Server-Instanzen benötigen ein Backend auf einem VPS.</p>
+    </footer>
+  </div>
+
+  <script>
+    // Demo-Server-Daten (später durch API ersetzen)
+    const demoServers = [
+      {name:"LobiGmbh's Survival",plan:"Nano",players:"7/10",status:"online"},
+      {name:"TheHappyMCRealm",plan:"Ultra",players:"18/20",status:"online"},
+      {name:"TestServer_Free",plan:"Free",players:"2/5",status:"online"},
+      {name:">GOD< Arena PVP",plan:"GOD",players:"42/∞",status:"online"}
+    ];
+
+    function renderServers(){
+      const list = document.getElementById('serverList');
+      list.innerHTML = demoServers.map(s => `
+        <div class="server">
+          <div>
+            <div class="server-name">${s.name} <span class="badge ${s.plan.toLowerCase()}">${s.plan}</span></div>
+            <div class="server-players">👥 ${s.players} • 🟢 ${s.status}</div>
+          </div>
+          <button class="btn btn-outline" style="padding:8px 16px;font-size:.9rem">Verbinden</button>
+        </div>
+      `).join('');
+    }
+
+    function selectPlan(plan){
+      alert(`🎉 Du hast "${plan}" ausgewählt!\n\nHinweis: Für echte Server-Erstellung wird ein Backend benötigt.\nBesuche unsere GitHub Org: https://github.com/thenano-host`);
+    }
+
+    // Initial render
+    document.addEventListener('DOMContentLoaded', renderServers);
+  </script>
+</body>
+</html>
