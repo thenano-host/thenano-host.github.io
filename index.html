@@ -68,7 +68,9 @@
     .card:hover::before{opacity:1}
     .card.god{border-color:#fbbf24;box-shadow:0 0 0 2px rgba(251,191,36,.1),var(--shadow)}
     .card.god::before{background:linear-gradient(90deg,#fbbf24,#f59e0b)}
-    .card h3{font-size:1.5rem;font-weight:800;margin:8px 0}
+    .card.nano{border-color:#7c3aed;box-shadow:0 0 0 2px rgba(124,58,237,.1),var(--shadow)}
+    .card.nano::before{background:linear-gradient(90deg,#7c3aed,#06b6d4)}
+    .card h3{font-size:1.5rem;font-weight:800;margin:8px 0;display:flex;align-items:center;justify-content:center;gap:8px}
     .price{font-size:2.2rem;font-weight:900;margin:18px 0}
     .price.free{color:var(--success)}.price.ultra{color:var(--accent2)}
     .price.nano{color:var(--accent)}.price.god{color:#d97706}
@@ -77,6 +79,13 @@
     .features li:last-child{border:none}
     .features li::before{content:'✓';color:var(--success);font-weight:900}
     .features li:nth-child(5)::before{content:'✗';color:var(--muted)}
+    
+    /* Badges */
+    .badge{display:inline-block;padding:5px 12px;border-radius:20px;font-size:.7rem;font-weight:800}
+    .badge.free{background:rgba(16,185,129,.15);color:var(--success)}
+    .badge.nano{background:linear-gradient(45deg,var(--accent),var(--accent2));color:#fff}
+    .badge.god{background:rgba(251,191,36,.2);color:#d97706}
+    .badge-new{background:linear-gradient(45deg,var(--accent),var(--accent2));color:#fff;animation:pulse 2s infinite}
     
     /* Dashboard Coming Soon */
     .dashboard-section{
@@ -126,12 +135,6 @@
     footer a{color:var(--accent);text-decoration:none;font-weight:600}
     footer a:hover{text-decoration:underline}
     
-    /* Badge */
-    .badge{display:inline-block;padding:5px 12px;border-radius:20px;font-size:.75rem;font-weight:700;margin-left:10px}
-    .badge.free{background:rgba(16,185,129,.15);color:var(--success)}
-    .badge.god{background:rgba(251,191,36,.2);color:#d97706}
-    .badge-new{background:linear-gradient(45deg,var(--accent),var(--accent2));color:#fff;animation:pulse 2s infinite}
-    
     /* Responsive */
     @media(max-width:700px){
       .hero h1{font-size:2.2rem}
@@ -141,6 +144,7 @@
       .countdown{gap:10px}
       .countdown-item{min-width:70px;padding:12px 16px}
       .countdown-num{font-size:1.4rem}
+      .tariffs{grid-template-columns:1fr}
     }
   </style>
 </head>
@@ -164,11 +168,12 @@
       <a href="#dashboard" class="btn btn-outline" style="margin-left:12px">Dashboard Preview 🔜</a>
     </section>
 
-    <!-- Tariffs -->
+    <!-- Tariffs (Neue Reihenfolge: Free → Ultra → Nano 🥈 → >GOD< 👑) -->
     <h2 class="section-title" id="tarife">🎁 Unsere Tarife</h2>
     <div class="tariffs">
+      <!-- Free -->
       <div class="card">
-        <h3>Free</h3>
+        <h3>Free <span class="badge free">START</span></h3>
         <div class="price free">€0</div>
         <ul class="features">
           <li>1 GB RAM</li>
@@ -179,6 +184,8 @@
         </ul>
         <button class="btn btn-outline" onclick="selectPlan('Free')">Auswählen</button>
       </div>
+      
+      <!-- Ultra -->
       <div class="card">
         <h3>Ultra</h3>
         <div class="price ultra">€4,99</div>
@@ -191,8 +198,10 @@
         </ul>
         <button class="btn" onclick="selectPlan('Ultra')">Auswählen</button>
       </div>
-      <div class="card">
-        <h3>Nano</h3>
+      
+      <!-- Nano 🥈 2. BESTER TARIF -->
+      <div class="card nano">
+        <h3>Nano <span class="badge nano">🥈 2. Beste Wahl</span></h3>
         <div class="price nano">€2,49</div>
         <ul class="features">
           <li>2 GB RAM</li>
@@ -203,8 +212,10 @@
         </ul>
         <button class="btn" onclick="selectPlan('Nano')">Auswählen</button>
       </div>
+      
+      <!-- >GOD< 👑 BESTER TARIF -->
       <div class="card god">
-        <h3>>GOD< <span class="badge god">BEST</span></h3>
+        <h3>>GOD< <span class="badge god">👑 BEST</span></h3>
         <div class="price god">€14,99</div>
         <ul class="features">
           <li>16 GB RAM</li>
@@ -282,7 +293,7 @@
   <script>
     // Countdown: Ziel-Datum (z.B. 30 Tage ab heute)
     const launchDate = new Date();
-    launchDate.setDate(launchDate.getDate() + 30); // +30 Tage
+    launchDate.setDate(launchDate.getDate() + 30);
     
     function updateCountdown(){
       const now = new Date();
@@ -304,7 +315,13 @@
     updateCountdown();
     
     function selectPlan(plan){
-      alert(`🎉 Du hast "${plan}" ausgewählt!\n\n💡 Das Dashboard ist bald verfügbar – dann kannst du deinen Server sofort erstellen!\n\n🔔 Aktiviere Benachrichtigungen oder folge uns auf GitHub: https://github.com/thenano-host`);
+      const messages = {
+        'Free': '🎉 Du hast "Free" ausgewählt!\n\n💡 Perfekt zum Testen – upgrade später einfach auf Nano 🥈 oder >GOD< 👑',
+        'Ultra': '🎉 Du hast "Ultra" ausgewählt!\n\n💡 Tipp: Nano 🥈 bietet das beste Preis-Leistungs-Verhältnis!',
+        'Nano': '🎉 Du hast "Nano" ausgewählt!\n\n🥈 Beste Wahl! Solide Leistung zum fairen Preis – ideal für kleine Communities.',
+        'GOD': '🎉 Du hast ">GOD<" ausgewählt!\n\n👑 Absolute Power! Dein Server läuft auf High-End-Hardware mit Priority-Support.'
+      };
+      alert(messages[plan] + '\n\n🔔 Das Dashboard kommt bald – dann geht\'s direkt los!\n\n🔗 GitHub: https://github.com/thenano-host');
     }
     
     function notifyMe(){
@@ -321,7 +338,7 @@
       }
     }
     
-    // Smooth Scroll für Anker-Links
+    // Smooth Scroll
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener('click', e => {
         e.preventDefault();
