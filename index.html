@@ -4,347 +4,422 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Nano Host ⚡ Minecraft Server Hosting</title>
-  <meta name="description" content="Hoste deinen Minecraft Server bei Nano Host – Tarife: Free, Ultra, Nano, >GOD<"/>
   <style>
     :root{
-      --bg:#ffffff;--card:#f8fafc;--accent:#7c3aed;--accent2:#06b6d4;
-      --text:#0f172a;--muted:#64748b;--success:#10b981;--border:#e2e8f0;
-      --shadow:0 10px 40px rgba(0,0,0,.08);--glow:0 0 30px rgba(124,58,237,.15)
+      --bg:#0B1120;--bg2:#0F172A;--card:#1E293B;
+      --accent:#6366F1;--accent2:#3B82F6;--accent3:#8B5CF6;
+      --text:#F8FAFC;--muted:#94A3B8;--border:#1E293B;
+      --success:#10B981;--warning:#F59E0B;--danger:#EF4444;
+      --shadow:0 20px 60px rgba(0,0,0,.4);--glow:0 0 40px rgba(99,102,241,.2)
     }
     *{margin:0;padding:0;box-sizing:border-box}
     body{
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,sans-serif;
       background:var(--bg);color:var(--text);line-height:1.6;
-      background-image:radial-gradient(circle at 10% 10%,rgba(124,58,237,.06) 0,transparent 40%),
-                       radial-gradient(circle at 90% 90%,rgba(6,182,212,.05) 0,transparent 40%)
+      background-image:
+        radial-gradient(ellipse at 15% 10%,rgba(99,102,241,.12) 0,transparent 50%),
+        radial-gradient(ellipse at 85% 85%,rgba(59,130,246,.08) 0,transparent 50%);
+      min-height:100vh;overflow-x:hidden
     }
-    .container{max-width:1100px;margin:0 auto;padding:20px}
-    
-    /* Header */
+    .container{max-width:1150px;margin:0 auto;padding:20px}
     header{
       display:flex;justify-content:space-between;align-items:center;
-      padding:20px 0;border-bottom:1px solid var(--border);margin-bottom:40px;
-      position:sticky;top:0;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);z-index:100
+      padding:18px 24px;border-bottom:1px solid var(--border);margin-bottom:50px;
+      position:sticky;top:0;background:rgba(11,17,32,.92);backdrop-filter:blur(12px);z-index:200;
+      border-radius:0 0 16px 16px
     }
-    .logo{font-size:1.6rem;font-weight:900;background:linear-gradient(45deg,var(--accent),var(--accent2));
-      -webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-.5px}
-    nav a{color:var(--muted);text-decoration:none;margin-left:22px;font-weight:500;transition:.2s;position:relative}
-    nav a:hover{color:var(--accent)}
-    nav a::after{content:'';position:absolute;bottom:-5px;left:0;width:0;height:2px;background:var(--accent);transition:.2s}
-    nav a:hover::after{width:100%}
-    
-    /* Hero */
-    .hero{text-align:center;padding:50px 20px;animation:fadeIn .6s ease}
-    @keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-    .hero h1{font-size:3rem;font-weight:900;margin-bottom:15px;line-height:1.1}
-    .hero h1 span{background:linear-gradient(45deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-    .hero p{color:var(--muted);margin-bottom:30px;max-width:650px;margin-inline:auto;font-size:1.1rem}
-    
-    /* Buttons */
-    .btn{
-      display:inline-block;background:var(--accent);color:#fff;padding:14px 32px;
-      border-radius:12px;text-decoration:none;font-weight:700;transition:.2s;border:none;cursor:pointer;
-      box-shadow:var(--glow);position:relative;overflow:hidden
+    .logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+    .logo svg{width:36px;height:36px;filter:drop-shadow(0 0 8px rgba(99,102,241,.6))}
+    .logo-text{font-size:1.4rem;font-weight:900;letter-spacing:-.5px;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    nav{display:flex;align-items:center;gap:6px}
+    nav a{color:var(--muted);text-decoration:none;padding:8px 16px;font-weight:500;transition:.2s;border-radius:8px}
+    nav a:hover{color:var(--text);background:rgba(99,102,241,.12)}
+    .auth-btns{display:flex;gap:8px;margin-left:8px}
+    .btn-login{
+      background:transparent;border:1.5px solid var(--accent);color:var(--accent);
+      padding:8px 18px;border-radius:8px;font-weight:600;cursor:pointer;transition:.2s;font-size:.9rem
     }
-    .btn::before{content:'';position:absolute;inset:0;background:linear-gradient(45deg,transparent,rgba(255,255,255,.2),transparent);transform:translateX(-100%);transition:.5s}
-    .btn:hover::before{transform:translateX(100%)}
-    .btn:hover{transform:translateY(-3px);box-shadow:0 15px 50px rgba(124,58,237,.25)}
-    .btn-outline{background:transparent;border:2px solid var(--accent);color:var(--accent)}
-    .btn-outline:hover{background:var(--accent);color:#fff}
-    .btn-god{background:linear-gradient(45deg,#fbbf24,#f59e0b);color:#000}
-    
-    /* Section Title */
-    .section-title{text-align:center;font-size:2rem;font-weight:800;margin:60px 0 35px;position:relative}
-    .section-title::after{content:'';display:block;width:60px;height:4px;background:linear-gradient(45deg,var(--accent),var(--accent2));margin:12px auto;border-radius:2px}
-    
-    /* Tariffs */
-    .tariffs{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px}
+    .btn-login:hover{background:var(--accent);color:#fff}
+    .btn-register{
+      background:linear-gradient(135deg,var(--accent),var(--accent3));color:#fff;
+      padding:8px 18px;border-radius:8px;font-weight:600;cursor:pointer;border:none;transition:.2s;font-size:.9rem
+    }
+    .btn-register:hover{transform:translateY(-1px);box-shadow:0 8px 25px rgba(99,102,241,.35)}
+    .hero{text-align:center;padding:60px 20px 40px;animation:fadeUp .8s ease}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+    .hero h1{font-size:3.2rem;font-weight:900;margin-bottom:18px;line-height:1.1}
+    .hero h1 span{background:linear-gradient(135deg,var(--accent),var(--accent2),var(--accent3));
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-size:200% 200%;animation:gm 4s ease infinite}
+    @keyframes gm{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+    .hero p{color:var(--muted);margin-bottom:35px;max-width:680px;margin-inline:auto;font-size:1.12rem;line-height:1.7}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.2);
+      padding:8px 18px;border-radius:24px;font-size:.9rem;color:var(--accent2);margin-bottom:20px}
+    .section-title{text-align:center;font-size:2.1rem;font-weight:800;margin:70px 0 40px;position:relative}
+    .section-title::after{content:'';display:block;width:70px;height:4px;margin:14px auto;border-radius:2px;
+      background:linear-gradient(90deg,var(--accent),var(--accent2))}
+    .tariffs{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:24px}
     .card{
-      background:var(--card);border:2px solid var(--border);border-radius:16px;
-      padding:28px;text-align:center;transition:.3s;position:relative;overflow:hidden
+      background:var(--card);border:1.5px solid var(--border);border-radius:18px;
+      padding:30px 26px;text-align:center;transition:.3s;position:relative;overflow:hidden
     }
-    .card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--accent),var(--accent2));opacity:0;transition:.3s}
-    .card:hover{border-color:var(--accent);transform:translateY(-6px);box-shadow:var(--shadow)}
+    .card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
+      background:linear-gradient(90deg,var(--accent),var(--accent2));opacity:0;transition:.3s}
+    .card:hover{border-color:var(--accent);transform:translateY(-6px);box-shadow:var(--glow)}
     .card:hover::before{opacity:1}
-    .card.god{border-color:#fbbf24;box-shadow:0 0 0 2px rgba(251,191,36,.1),var(--shadow)}
-    .card.god::before{background:linear-gradient(90deg,#fbbf24,#f59e0b)}
-    .card.nano{border-color:#7c3aed;box-shadow:0 0 0 2px rgba(124,58,237,.1),var(--shadow)}
-    .card.nano::before{background:linear-gradient(90deg,#7c3aed,#06b6d4)}
-    .card h3{font-size:1.5rem;font-weight:800;margin:8px 0;display:flex;align-items:center;justify-content:center;gap:8px}
-    .price{font-size:2.2rem;font-weight:900;margin:18px 0}
+    .card.nano{border-color:var(--accent3);box-shadow:0 0 0 1px var(--accent3),var(--glow)}
+    .card.nano::before{background:linear-gradient(90deg,var(--accent3),var(--accent))}
+    .card.god{border-color:#F59E0B;box-shadow:0 0 0 1px rgba(245,158,11,.2),0 0 35px rgba(245,158,11,.1)}
+    .card.god::before{background:linear-gradient(90deg,#F59E0B,#D97706)}
+    .card h3{font-size:1.4rem;font-weight:800;margin:8px 0 2px}
+    .price{font-size:2.3rem;font-weight:900;margin:14px 0 2px}
     .price.free{color:var(--success)}.price.ultra{color:var(--accent2)}
-    .price.nano{color:var(--accent)}.price.god{color:#d97706}
-    .features{list-style:none;margin:22px 0;text-align:left}
-    .features li{padding:10px 0;color:var(--muted);border-bottom:1px dashed var(--border);display:flex;align-items:center;gap:8px}
-    .features li:last-child{border:none}
-    .features li::before{content:'✓';color:var(--success);font-weight:900}
-    .features li:nth-child(5)::before{content:'✗';color:var(--muted)}
+    .price.nano{color:var(--accent3)}.price.god{color:#F59E0B}
+    .price-sub{color:var(--muted);font-size:.82rem;margin-bottom:16px}
+    .limits-box{background:rgba(15,23,42,.5);border-radius:12px;padding:14px;margin:14px 0;text-align:left;border:1px solid var(--border)}
+    .limit-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;font-size:.9rem}
+    .limit-row span:first-child{color:var(--muted)}
+    .limit-row span:last-child{font-weight:700}
+    .rec-players{display:flex;align-items:center;gap:6px;background:rgba(16,185,129,.08);
+      border:1px solid rgba(16,185,129,.15);border-radius:10px;padding:10px 14px;margin:14px 0;font-size:.88rem}
+    .rec-players .icon{font-size:1.1rem}
+    .rec-players .text{color:var(--muted)}
+    .rec-players strong{color:var(--success)}
+    .no-limits{display:flex;align-items:center;gap:6px;background:rgba(99,102,241,.08);
+      border:1px solid rgba(99,102,241,.15);border-radius:10px;padding:10px 14px;margin:10px 0;font-size:.85rem;color:var(--accent2)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;border-radius:10px;
+      font-weight:700;font-size:.95rem;cursor:pointer;transition:.2s;border:none;font-family:inherit}
+    .btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent3));color:#fff}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(99,102,241,.3)}
+    .btn-outline{background:transparent;border:1.5px solid var(--accent);color:var(--accent)}
+    .btn-outline:hover{background:var(--accent);color:#fff}
+    .btn-god{background:linear-gradient(135deg,#F59E0B,#D97706);color:#000}
+    .badge{display:inline-flex;align-items:center;gap:4px;padding:4px 11px;border-radius:20px;font-size:.7rem;font-weight:800}
+    .badge.free{background:rgba(16,185,129,.12);color:var(--success)}
+    .badge.nano{background:linear-gradient(135deg,rgba(139,92,246,.2),rgba(99,102,241,.2));color:#A78BFA}
+    .badge.god{background:rgba(245,158,11,.15);color:#F59E0B}
+    .dashboard-section{background:linear-gradient(135deg,rgba(30,41,59,.6),rgba(15,23,42,.8));
+      border:1.5px dashed rgba(99,102,241,.3);border-radius:22px;padding:45px;text-align:center;margin:50px 0;position:relative;overflow:hidden}
+    .dashboard-icon{font-size:4.5rem;margin-bottom:18px;animation:bounce 2.5s ease infinite}
+    @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+    .dashboard-title{font-size:1.9rem;font-weight:800;margin-bottom:12px}
+    .dashboard-desc{color:var(--muted);margin-bottom:28px;max-width:620px;margin-inline:auto}
+    .status-bar{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:30px 0}
+    .status{background:var(--card);padding:14px 22px;border-radius:12px;display:flex;align-items:center;gap:10px;border:1px solid var(--border);font-size:.95rem}
+    .dot{width:10px;height:10px;border-radius:50%;animation:pulse 2s infinite}
+    .dot.green{background:var(--success);box-shadow:0 0 8px rgba(16,185,129,.5)}
+    .dot.yellow{background:var(--warning);box-shadow:0 0 8px rgba(245,158,11,.5)}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+    footer{text-align:center;padding:60px 20px 35px;color:var(--muted);border-top:1px solid var(--border);margin-top:60px;font-size:.95rem}
+    footer a{color:var(--accent2);text-decoration:none}footer a:hover{color:var(--accent)}
     
-    /* Badges */
-    .badge{display:inline-block;padding:5px 12px;border-radius:20px;font-size:.7rem;font-weight:800}
-    .badge.free{background:rgba(16,185,129,.15);color:var(--success)}
-    .badge.nano{background:linear-gradient(45deg,var(--accent),var(--accent2));color:#fff}
-    .badge.god{background:rgba(251,191,36,.2);color:#d97706}
-    .badge-new{background:linear-gradient(45deg,var(--accent),var(--accent2));color:#fff;animation:pulse 2s infinite}
-    
-    /* Dashboard Coming Soon */
-    .dashboard-section{
-      background:linear-gradient(135deg,#f8fafc,#eef2ff);border:2px dashed var(--accent);
-      border-radius:20px;padding:40px;text-align:center;margin:50px 0;position:relative;overflow:hidden
-    }
-    .dashboard-section::before{
-      content:'';position:absolute;inset:-2px;border-radius:20px;
-      background:linear-gradient(45deg,var(--accent),var(--accent2),#fbbf24,var(--accent));
-      background-size:300% 300%;animation:gradientShift 4s ease infinite;opacity:.15;z-index:-1
-    }
-    @keyframes gradientShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
-    .dashboard-icon{font-size:4rem;margin-bottom:15px;animation:bounce 2s infinite}
-    @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-    .dashboard-title{font-size:1.8rem;font-weight:800;margin-bottom:10px}
-    .dashboard-desc{color:var(--muted);margin-bottom:25px;max-width:600px;margin-inline:auto}
-    
-    /* Progress Bar */
-    .progress-wrap{background:#fff;border-radius:12px;padding:20px;margin:25px 0;box-shadow:var(--shadow)}
-    .progress-label{display:flex;justify-content:space-between;margin-bottom:10px;font-weight:600}
-    .progress-bar{height:12px;background:var(--border);border-radius:6px;overflow:hidden}
-    .progress-fill{height:100%;width:65%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:6px;transition:width .5s ease;position:relative}
-    .progress-fill::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);animation:shine 2s infinite}
-    @keyframes shine{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
-    
-    /* Countdown */
-    .countdown{display:flex;justify-content:center;gap:15px;margin:25px 0;flex-wrap:wrap}
-    .countdown-item{background:#fff;padding:15px 20px;border-radius:12px;min-width:80px;box-shadow:var(--shadow)}
-    .countdown-num{font-size:1.8rem;font-weight:900;color:var(--accent)}
-    .countdown-label{font-size:.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
-    
-    /* Features Preview */
-    .features-preview{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px;margin-top:30px}
-    .feature-item{background:#fff;padding:18px;border-radius:12px;text-align:center;box-shadow:var(--shadow);transition:.2s}
-    .feature-item:hover{transform:translateY(-3px)}
-    .feature-icon{font-size:1.8rem;margin-bottom:8px}
-    .feature-title{font-weight:700;font-size:.95rem}
-    
-    /* Status Bar */
-    .status-bar{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:30px 0}
-    .status{background:var(--card);padding:12px 20px;border-radius:10px;display:flex;align-items:center;gap:8px;border:1px solid var(--border);font-weight:500}
-    .dot{width:10px;height:10px;border-radius:50%;background:var(--success);animation:pulse 2s infinite}
-    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-    
-    /* Footer */
-    footer{text-align:center;padding:50px 20px 30px;color:var(--muted);border-top:1px solid var(--border);margin-top:40px;font-size:.95rem}
-    footer a{color:var(--accent);text-decoration:none;font-weight:600}
-    footer a:hover{text-decoration:underline}
-    
-    /* Responsive */
-    @media(max-width:700px){
-      .hero h1{font-size:2.2rem}
-      header{flex-direction:column;gap:15px}
-      nav{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
-      nav a{margin:0;font-size:.95rem}
-      .countdown{gap:10px}
-      .countdown-item{min-width:70px;padding:12px 16px}
-      .countdown-num{font-size:1.4rem}
-      .tariffs{grid-template-columns:1fr}
+    /* ===== MODAL ===== */
+    .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);
+      z-index:1000;display:none;align-items:center;justify-content:center;padding:20px;animation:fadeIn .3s ease}
+    .modal-overlay.active{display:flex}
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+    .modal{background:var(--bg2);border:1.5px solid var(--border);border-radius:20px;
+      width:100%;max-width:420px;box-shadow:var(--shadow);animation:modalSlide .4s ease;overflow:hidden}
+    @keyframes modalSlide{from{opacity:0;transform:translateY(30px) scale(.95)}to{opacity:1;transform:none}}
+    .modal-tabs{display:flex;border-bottom:1px solid var(--border)}
+    .modal-tab{flex:1;padding:14px;text-align:center;font-weight:700;font-size:.95rem;cursor:pointer;
+      color:var(--muted);transition:.2s;border:none;background:transparent;font-family:inherit}
+    .modal-tab.active{color:var(--accent2);border-bottom:2px solid var(--accent2);background:rgba(59,130,246,.05)}
+    .modal-body{padding:30px 28px}
+    .modal-close{position:absolute;top:14px;right:16px;background:none;border:none;color:var(--muted);
+      font-size:1.3rem;cursor:pointer;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:6px}
+    .modal-close:hover{color:var(--text);background:rgba(148,163,184,.15)}
+    .tab-content{display:none}.tab-content.active{display:block;animation:fadeIn .3s ease}
+    .form-group{margin-bottom:18px}
+    .form-group label{display:block;font-weight:600;margin-bottom:7px;font-size:.88rem}
+    .form-input{width:100%;padding:12px 14px;background:rgba(15,23,42,.8);border:1.5px solid var(--border);
+      border-radius:10px;color:var(--text);font-size:.95rem;transition:.2s;outline:none;font-family:inherit}
+    .form-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(99,102,241,.15)}
+    .form-input::placeholder{color:var(--muted)}
+    .form-btn{width:100%;padding:13px;background:linear-gradient(135deg,var(--accent),var(--accent3));
+      color:#fff;border:none;border-radius:10px;font-size:.95rem;font-weight:700;cursor:pointer;
+      transition:.2s;font-family:inherit;margin-top:4px}
+    .form-btn:hover{transform:translateY(-1px);box-shadow:0 8px 25px rgba(99,102,241,.3)}
+    .form-btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
+    .msg{padding:11px 14px;border-radius:10px;margin-bottom:16px;font-size:.88rem;display:none;animation:fadeIn .3s ease}
+    .msg.error{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:var(--danger)}
+    .msg.success{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.2);color:var(--success)}
+    .msg.show{display:block}
+    .pw-strength{height:4px;background:var(--border);border-radius:2px;margin-top:8px;overflow:hidden}
+    .pw-strength-fill{height:100%;width:0;border-radius:2px;transition:.3s}
+    .pw-hint{font-size:.75rem;color:var(--muted);margin-top:4px}
+    @media(max-width:750px){
+      .hero h1{font-size:2.3rem}
+      header{flex-direction:column;gap:14px;padding:14px}
+      nav{flex-wrap:wrap;justify-content:center;gap:4px}
+      .auth-btns{margin:4px auto 0}
+      .tariffs{grid-template-columns:1fr;max-width:360px;margin-inline:auto}
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <!-- Header -->
-    <header>
-      <div class="logo">⚡ Nano Host</div>
-      <nav>
-        <a href="#tarife">Tarife</a>
-        <a href="#dashboard">Dashboard</a>
-        <a href="https://github.com/thenano-host" target="_blank">GitHub</a>
-      </nav>
-    </header>
 
-    <!-- Hero -->
-    <section class="hero">
-      <h1>Dein Minecraft Server.<br><span>Next-Level Hosting.</span></h1>
-      <p>Hoste deinen eigenen Minecraft Server bei Nano Host – mit Tarifen für jeden Bedarf. Von Free bis >GOD<. Clean. Schnell. Einfach.</p>
-      <a href="#tarife" class="btn">Tarife ansehen</a>
-      <a href="#dashboard" class="btn btn-outline" style="margin-left:12px">Dashboard Preview 🔜</a>
-    </section>
-
-    <!-- Tariffs (Neue Reihenfolge: Free → Ultra → Nano 🥈 → >GOD< 👑) -->
-    <h2 class="section-title" id="tarife">🎁 Unsere Tarife</h2>
-    <div class="tariffs">
-      <!-- Free -->
-      <div class="card">
-        <h3>Free <span class="badge free">START</span></h3>
-        <div class="price free">€0</div>
-        <ul class="features">
-          <li>1 GB RAM</li>
-          <li>5 Slots</li>
-          <li>Shared CPU</li>
-          <li>Subdomain</li>
-          <li>Kein Backup</li>
-        </ul>
-        <button class="btn btn-outline" onclick="selectPlan('Free')">Auswählen</button>
-      </div>
-      
-      <!-- Ultra -->
-      <div class="card">
-        <h3>Ultra</h3>
-        <div class="price ultra">€4,99</div>
-        <ul class="features">
-          <li>4 GB RAM</li>
-          <li>20 Slots</li>
-          <li>Dedicated CPU</li>
-          <li>Eigene IP</li>
-          <li>Tägliche Backups</li>
-        </ul>
-        <button class="btn" onclick="selectPlan('Ultra')">Auswählen</button>
-      </div>
-      
-      <!-- Nano 🥈 2. BESTER TARIF -->
-      <div class="card nano">
-        <h3>Nano <span class="badge nano">🥈 2. Beste Wahl</span></h3>
-        <div class="price nano">€2,49</div>
-        <ul class="features">
-          <li>2 GB RAM</li>
-          <li>10 Slots</li>
-          <li>Balanced CPU</li>
-          <li>Subdomain</li>
-          <li>Wöchentliche Backups</li>
-        </ul>
-        <button class="btn" onclick="selectPlan('Nano')">Auswählen</button>
-      </div>
-      
-      <!-- >GOD< 👑 BESTER TARIF -->
-      <div class="card god">
-        <h3>>GOD< <span class="badge god">👑 BEST</span></h3>
-        <div class="price god">€14,99</div>
-        <ul class="features">
-          <li>16 GB RAM</li>
-          <li>Unbegrenzte Slots</li>
-          <li>High-Perf CPU</li>
-          <li>Dedicated IP + Port</li>
-          <li>Echtzeit-Backups + Priority</li>
-        </ul>
-        <button class="btn btn-god" onclick="selectPlan('GOD')">Auswählen</button>
-      </div>
+<header>
+  <a href="#" class="logo">
+    <svg viewBox="0 0 40 40" fill="none"><defs><linearGradient id="lg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#6366F1"/><stop offset="100%" stop-color="#3B82F6"/></linearGradient><filter id="gl"><feGaussianBlur stdDeviation="2"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+    <rect x="2" y="2" width="36" height="36" rx="8" fill="url(#lg)" filter="url(#gl)"/>
+    <path d="M12 28V12L20 22L28 12V28" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </svg>
+    <span class="logo-text">Nano Host</span>
+  </a>
+  <nav>
+    <a href="#tarife">Tarife</a>
+    <a href="#dashboard">Dashboard</a>
+    <a href="https://github.com/thenano-host" target="_blank">GitHub</a>
+    <div class="auth-btns">
+      <button class="btn-login" onclick="openModal('login')">Login</button>
+      <button class="btn-register" onclick="openModal('register')">Registrieren</button>
     </div>
+  </nav>
+</header>
 
-    <!-- Dashboard Coming Soon -->
-    <h2 class="section-title" id="dashboard">🚀 Dashboard <span class="badge badge-new">COMING SOON</span></h2>
-    <div class="dashboard-section">
-      <div class="dashboard-icon">🎮</div>
-      <h3 class="dashboard-title">Dein Server-Panel. Bald live.</h3>
-      <p class="dashboard-desc">Erstelle, verwalte und starte deine Minecraft Server mit einem Klick. Echtzeit-Stats, Dateimanager, Plugin-Installer & mehr – alles in einem cleanen Dashboard.</p>
-      
-      <!-- Progress -->
-      <div class="progress-wrap">
-        <div class="progress-label">
-          <span>Entwicklungs-Status</span>
-          <span>65%</span>
-        </div>
-        <div class="progress-bar"><div class="progress-fill"></div></div>
+<div class="container">
+  <section class="hero">
+    <div class="hero-badge">🔓 Keine Player-Limits • Nur RAM & Speicher</div>
+    <h1>Dein Minecraft Server.<br><span>Next-Level Hosting.</span></h1>
+    <p>Hoste deinen eigenen Minecraft Server bei Nano Host. Keine Spieler-Limits – du entscheidest, wie viele joined. Einzige Limits: RAM & Speicher. Alles andere ist frei.</p>
+    <button class="btn btn-primary" style="width:auto;padding:14px 32px;margin:0 8px" onclick="openModal('register')">🚀 Kostenlos registrieren</button>
+    <button class="btn btn-outline" style="width:auto;padding:14px 32px;margin:0 8px;cursor:pointer" onclick="openModal('login')">Einloggen</button>
+  </section>
+
+  <h2 class="section-title" id="tarife">🎁 Unsere Tarife</h2>
+  <div class="tariffs">
+    <!-- Free -->
+    <div class="card">
+      <h3>Free <span class="badge free">START</span></h3>
+      <div class="price free">€0</div>
+      <div class="price-sub">Für immer kostenlos</div>
+      <div class="limits-box">
+        <div class="limit-row"><span>RAM</span><span style="color:var(--success)">1 GB</span></div>
+        <div class="limit-row"><span>Speicher</span><span>1 GB</span></div>
       </div>
-      
-      <!-- Countdown -->
-      <div class="countdown" id="countdown">
-        <div class="countdown-item"><div class="countdown-num" id="days">00</div><div class="countdown-label">Tage</div></div>
-        <div class="countdown-item"><div class="countdown-num" id="hours">00</div><div class="countdown-label">Std</div></div>
-        <div class="countdown-item"><div class="countdown-num" id="minutes">00</div><div class="countdown-label">Min</div></div>
-        <div class="countdown-item"><div class="countdown-num" id="seconds">00</div><div class="countdown-label">Sek</div></div>
+      <div class="rec-players">
+        <span class="icon">👥</span>
+        <span class="text">Empfohlen: <strong>~40 Spieler</strong> (kein Limit!)</span>
       </div>
-      
-      <!-- Features Preview -->
-      <div class="features-preview">
-        <div class="feature-item">
-          <div class="feature-icon">⚡</div>
-          <div class="feature-title">1-Klick Start</div>
-        </div>
-        <div class="feature-item">
-          <div class="feature-icon">📊</div>
-          <div class="feature-title">Live Stats</div>
-        </div>
-        <div class="feature-item">
-          <div class="feature-icon">🔌</div>
-          <div class="feature-title">Plugin Manager</div>
-        </div>
-        <div class="feature-item">
-          <div class="feature-icon">🔐</div>
-          <div class="feature-title">Secure Access</div>
-        </div>
-      </div>
-      
-      <button class="btn" style="margin-top:25px" onclick="notifyMe()">🔔 Benachrichtigung aktivieren</button>
+      <div class="no-limits">🔓 Keine Player-Limits</div>
+      <button class="btn btn-outline" onclick="selectPlan('Free')">Tarif wählen</button>
     </div>
-
-    <!-- System Status -->
-    <h2 class="section-title">🟢 System Status</h2>
-    <div class="status-bar">
-      <div class="status"><div class="dot"></div> API: Online</div>
-      <div class="status"><div class="dot"></div> Panel: In Entwicklung</div>
-      <div class="status"><div class="dot"></div> Nodes: Bereit</div>
+    <!-- Ultra -->
+    <div class="card">
+      <h3>Ultra</h3>
+      <div class="price ultra">€4,99</div>
+      <div class="price-sub">/ Monat</div>
+      <div class="limits-box">
+        <div class="limit-row"><span>RAM</span><span style="color:var(--accent2)">4 GB</span></div>
+        <div class="limit-row"><span>Speicher</span><span>10 GB</span></div>
+      </div>
+      <div class="rec-players">
+        <span class="icon">👥</span>
+        <span class="text">Empfohlen: <strong>~80+ Spieler</strong> (kein Limit!)</span>
+      </div>
+      <div class="no-limits">🔓 Keine Player-Limits</div>
+      <button class="btn btn-primary" onclick="selectPlan('Ultra')">Tarif wählen</button>
     </div>
-
-    <!-- Footer -->
-    <footer>
-      <p>© 2026 <strong>Nano Host</strong> • <a href="https://thenano-host.github.io">thenano-host.github.io</a> • <a href="https://github.com/thenano-host" target="_blank">GitHub Org</a></p>
-      <p style="margin-top:12px;font-size:.9rem;color:var(--muted)">💡 Dashboard Beta startet Q2 2026 – Folge uns auf GitHub für Updates!</p>
-    </footer>
+    <!-- Nano -->
+    <div class="card nano">
+      <h3>Nano <span class="badge nano">🥈 2. Beste Wahl</span></h3>
+      <div class="price nano">€2,49</div>
+      <div class="price-sub">/ Monat • Beliebtester Tarif</div>
+      <div class="limits-box">
+        <div class="limit-row"><span>RAM</span><span style="color:var(--accent3)">2 GB</span></div>
+        <div class="limit-row"><span>Speicher</span><span>5 GB</span></div>
+      </div>
+      <div class="rec-players">
+        <span class="icon">👥</span>
+        <span class="text">Empfohlen: <strong>~60 Spieler</strong> (kein Limit!)</span>
+      </div>
+      <div class="no-limits">🔓 Keine Player-Limits</div>
+      <button class="btn" style="background:linear-gradient(135deg,var(--accent3),var(--accent));color:#fff" onclick="selectPlan('Nano')">Tarif wählen</button>
+    </div>
+    <!-- GOD -->
+    <div class="card god">
+      <h3>>GOD< <span class="badge god">👑 BEST</span></h3>
+      <div class="price god">€14,99</div>
+      <div class="price-sub">/ Monat • Max Power</div>
+      <div class="limits-box">
+        <div class="limit-row"><span>RAM</span><span style="color:#F59E0B">16 GB</span></div>
+        <div class="limit-row"><span>Speicher</span><span>50 GB SSD</span></div>
+      </div>
+      <div class="rec-players">
+        <span class="icon">👥</span>
+        <span class="text">Empfohlen: <strong>Unbegrenzt 🚀</strong></span>
+      </div>
+      <div class="no-limits">🔓 Keine Player-Limits • Dedicated IP</div>
+      <button class="btn btn-god" onclick="selectPlan('GOD')">Tarif wählen</button>
+    </div>
   </div>
 
-  <script>
-    // Countdown: Ziel-Datum (z.B. 30 Tage ab heute)
-    const launchDate = new Date();
-    launchDate.setDate(launchDate.getDate() + 30);
+  <h2 class="section-title" id="dashboard">🚀 Dashboard <span class="badge" style="background:linear-gradient(135deg,var(--accent),var(--accent3));color:#fff">COMING SOON</span></h2>
+  <div class="dashboard-section">
+    <div class="dashboard-icon">🎮</div>
+    <h3 class="dashboard-title">Dein Server-Panel. Bald live.</h3>
+    <p class="dashboard-desc">Erstelle, verwalte und starte deine Minecraft Server mit einem Klick. Live-Stats, Dateimanager, Plugin-Installer & mehr.</p>
+  </div>
+
+  <h2 class="section-title">🟢 System Status</h2>
+  <div class="status-bar">
+    <div class="status"><div class="dot green"></div> API: Online</div>
+    <div class="status"><div class="dot yellow"></div> Panel: In Entwicklung</div>
+    <div class="status"><div class="dot green"></div> Nodes: Bereit</div>
+  </div>
+
+  <footer>
+    <p>© 2026 <strong>Nano Host</strong> • <a href="https://thenano-host.github.io">thenano-host.github.io</a></p>
+    <p style="margin-top:10px;font-size:.88rem;color:var(--muted)">💡 Dashboard Beta startet Q2 2026 • Folge uns auf GitHub!</p>
+  </footer>
+</div>
+
+<!-- ===== AUTH MODAL ===== -->
+<div class="modal-overlay" id="authModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal" style="position:relative">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-tabs">
+      <button class="modal-tab active" id="tabLogin" onclick="switchTab('login')">🔐 Login</button>
+      <button class="modal-tab" id="tabRegister" onclick="switchTab('register')">📝 Registrieren</button>
+    </div>
+    <div class="modal-body">
+      <!-- LOGIN -->
+      <div class="tab-content active" id="loginTab">
+        <div class="msg" id="loginMsg"></div>
+        <form id="loginForm" onsubmit="handleLogin(event)">
+          <div class="form-group">
+            <label>Benutzername oder E-Mail</label>
+            <input type="text" id="loginUser" class="form-input" placeholder="Dein Name oder E-Mail" required/>
+          </div>
+          <div class="form-group">
+            <label>Passwort</label>
+            <input type="password" id="loginPass" class="form-input" placeholder="Dein Passwort" required/>
+          </div>
+          <button type="submit" class="form-btn" id="loginBtn">🔐 Anmelden</button>
+        </form>
+      </div>
+      <!-- REGISTER -->
+      <div class="tab-content" id="registerTab">
+        <div class="msg" id="regMsg"></div>
+        <form id="regForm" onsubmit="handleRegister(event)">
+          <div class="form-group">
+            <label>Benutzername</label>
+            <input type="text" id="regUser" class="form-input" placeholder="Wähle einen Namen" required minlength="3"/>
+          </div>
+          <div class="form-group">
+            <label>E-Mail</label>
+            <input type="email" id="regEmail" class="form-input" placeholder="deine@email.de" required/>
+          </div>
+          <div class="form-group">
+            <label>Passwort</label>
+            <input type="password" id="regPass" class="form-input" placeholder="Mind. 6 Zeichen" required minlength="6" oninput="checkPw(this.value)"/>
+            <div class="pw-strength"><div class="pw-strength-fill" id="pwFill"></div></div>
+            <div class="pw-hint" id="pwHint">Mind. 6 Zeichen empfohlen</div>
+          </div>
+          <div class="form-group">
+            <label>Passwort wiederholen</label>
+            <input type="password" id="regPass2" class="form-input" placeholder="Nochmal eingeben" required/>
+          </div>
+          <button type="submit" class="form-btn" id="regBtn">🚀 Konto erstellen</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const API = 'http://localhost:3000/api';
+  
+  // Modal
+  function openModal(tab='login'){
+    document.getElementById('authModal').classList.add('active');
+    switchTab(tab);
+    clearMsgs();
+  }
+  function closeModal(){document.getElementById('authModal').classList.remove('active')}
+  function switchTab(tab){
+    document.getElementById('tabLogin').classList.toggle('active',tab==='login');
+    document.getElementById('tabRegister').classList.toggle('active',tab==='register');
+    document.getElementById('loginTab').classList.toggle('active',tab==='login');
+    document.getElementById('registerTab').classList.toggle('active',tab==='register');
+    clearMsgs();
+  }
+  function clearMsgs(){
+    document.querySelectorAll('.msg').forEach(m=>{m.className='msg';m.textContent=''});
+    document.querySelectorAll('.form-btn').forEach(b=>{b.disabled=false;b.textContent=b.id==='loginBtn'?'🔐 Anmelden':'🚀 Konto erstellen'});
+  }
+  function showMsg(id,text,type){
+    const el=document.getElementById(id);el.textContent=(type==='error'?'❌ ':'✅ ')+text;
+    el.className='msg '+type+' show';
+  }
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+  
+  // Password Strength
+  function checkPw(val){
+    const fill=document.getElementById('pwFill'),hint=document.getElementById('pwHint');
+    let s=0;if(val.length>=6)s++;if(val.length>=10)s++;if(/[A-Z]/.test(val)&&/[0-9]/.test(val))s++;
+    const w=['30%',`${60+s*20}%`];const c=['#EF4444','#F59E0B','#10B981'];
+    const i=Math.min(s,2);
+    fill.style.width=w[i];fill.style.background=c[i];
+    hint.textContent=s===0?'Zu kurz':s===1?'Schwach – mehr Zeichen!':s===2?'Mittel – Zahlen+Großbuchstaben?':'✅ Stark!';
+  }
+  
+  // REGISTER
+  async function handleRegister(e){
+    e.preventDefault();
+    const user=document.getElementById('regUser').value.trim();
+    const email=document.getElementById('regEmail').value.trim();
+    const pass=document.getElementById('regPass').value;
+    const pass2=document.getElementById('regPass2').value;
+    const btn=document.getElementById('regBtn');
     
-    function updateCountdown(){
-      const now = new Date();
-      const diff = launchDate - now;
-      if(diff <= 0){
-        document.getElementById('countdown').innerHTML = '<div style="font-weight:800;color:var(--success);font-size:1.2rem">🎉 LIVE!</div>';
-        return;
+    if(pass!==pass2){showMsg('regMsg','Passwörter stimmen nicht überein!','error');return}
+    btn.disabled=true;btn.textContent='⏳ Wird erstellt...';
+    
+    try{
+      const res=await fetch(API+'/register',{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({username:user,email,password:pass})});
+      const data=await res.json();
+      if(res.ok){showMsg('regMsg','Konto erstellt! Du kannst dich jetzt einloggen.','success');setTimeout(()=>switchTab('login'),1500)}
+      else showMsg('regMsg',data.error||'Fehler bei Registrierung','error');
+    }catch(err){showMsg('regMsg','Server nicht erreichbar. Backend starten?','error')}
+    btn.disabled=false;btn.textContent='🚀 Konto erstellen';
+  }
+  
+  // LOGIN
+  async function handleLogin(e){
+    e.preventDefault();
+    const user=document.getElementById('loginUser').value.trim();
+    const pass=document.getElementById('loginPass').value;
+    const btn=document.getElementById('loginBtn');
+    btn.disabled=true;btn.textContent='⏳ Prüfe...';
+    
+    try{
+      const res=await fetch(API+'/login',{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({username:user,password:pass})});
+      const data=await res.json();
+      if(res.ok){
+        showMsg('loginMsg','Erfolgreich angemeldet! Willkommen, '+data.user.username+'! 🎉','success');
+        localStorage.setItem('token',data.token);
+        setTimeout(()=>{alert('🎉 Willkommen, '+data.user.username+'!\n\n💡 Dashboard kommt bald!\n\nToken gespeichert für API-Zugriff.');closeModal()},1000);
       }
-      const d = Math.floor(diff / (1000*60*60*24));
-      const h = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
-      const m = Math.floor((diff % (1000*60*60)) / (1000*60));
-      const s = Math.floor((diff % (1000*60)) / 1000);
-      document.getElementById('days').textContent = String(d).padStart(2,'0');
-      document.getElementById('hours').textContent = String(h).padStart(2,'0');
-      document.getElementById('minutes').textContent = String(m).padStart(2,'0');
-      document.getElementById('seconds').textContent = String(s).padStart(2,'0');
-    }
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
-    
-    function selectPlan(plan){
-      const messages = {
-        'Free': '🎉 Du hast "Free" ausgewählt!\n\n💡 Perfekt zum Testen – upgrade später einfach auf Nano 🥈 oder >GOD< 👑',
-        'Ultra': '🎉 Du hast "Ultra" ausgewählt!\n\n💡 Tipp: Nano 🥈 bietet das beste Preis-Leistungs-Verhältnis!',
-        'Nano': '🎉 Du hast "Nano" ausgewählt!\n\n🥈 Beste Wahl! Solide Leistung zum fairen Preis – ideal für kleine Communities.',
-        'GOD': '🎉 Du hast ">GOD<" ausgewählt!\n\n👑 Absolute Power! Dein Server läuft auf High-End-Hardware mit Priority-Support.'
-      };
-      alert(messages[plan] + '\n\n🔔 Das Dashboard kommt bald – dann geht\'s direkt los!\n\n🔗 GitHub: https://github.com/thenano-host');
-    }
-    
-    function notifyMe(){
-      if('Notification' in window){
-        Notification.requestPermission().then(perm => {
-          if(perm === 'granted'){
-            alert('✅ Danke! Du wirst benachrichtigt, sobald das Dashboard live geht. 🚀');
-          } else {
-            alert('🔔 Benachrichtigungen blockiert. Folge uns stattdessen auf GitHub für Updates!');
-          }
-        });
-      } else {
-        alert('🔔 Dein Browser unterstützt keine Benachrichtigungen. Folge uns auf GitHub: https://github.com/thenano-host');
-      }
-    }
-    
-    // Smooth Scroll
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', e => {
-        e.preventDefault();
-        document.querySelector(a.getAttribute('href'))?.scrollIntoView({behavior: 'smooth'});
-      });
-    });
-  </script>
+      else showMsg('loginMsg',data.error||'Falsche Zugangsdaten','error');
+    }catch(err){showMsg('loginMsg','Server nicht erreichbar','error')}
+    btn.disabled=false;btn.textContent='🔐 Anmelden';
+  }
+  
+  function selectPlan(plan){
+    const msgs={
+      'Free':'🎉 Free gewählt! Keine Limits, nur 1GB RAM + 1GB Speicher.','Ultra':'🎉 Ultra gewählt! 4GB RAM + 10GB Speicher.',
+      'Nano':'🎉 Nano gewählt! 🥈 2GB RAM + 5GB Speicher.','GOD':'🎉 >GOD< gewählt! 👑 16GB RAM + 50GB SSD.'
+    };
+    const token=localStorage.getItem('token');
+    if(!token){openModal('register');alert('📝 Bitte erst registrieren oder einloggen, um einen Server zu erstellen!')}
+    else{alert(msgs[plan]+'\n\n💡 Dashboard kommt bald – dein '+plan+' Server wartet!')}
+  }
+</script>
+
 </body>
 </html>
